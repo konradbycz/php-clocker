@@ -1,0 +1,15 @@
+{
+    "name": "konrad/php-clocker",
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "bk46483",
+            "email": "bk46483@zut.edu.pl"
+        }
+    ],
+    "require": {}
+}
