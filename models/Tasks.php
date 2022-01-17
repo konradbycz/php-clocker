@@ -20,7 +20,7 @@ class Tasks extends Database
 
         $task
             ->setId($row['id'])
-            ->setUserId($row['user'])
+            ->setUserId($row['userId'])
             ->setProject($row['project'])
             ->setName($row['name'])
             ->setStart($row['start'])

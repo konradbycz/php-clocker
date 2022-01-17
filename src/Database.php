@@ -14,7 +14,7 @@ abstract class Database
 
     protected function openConnection(){
         try {
-            $this->connection = new PDO('mysql:dbname=clocker; host=localhost', 'root', '');
+            $this->connection = new PDO('mysql:dbname=clocker; host=localhost', 'root', 'zaq1@WSX');
         }catch (PDOException $e) {
             echo "PDOException was caught: {$e->getMessage()}";
             var_dump($e->getTraceAsString());
