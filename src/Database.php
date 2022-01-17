@@ -13,8 +13,11 @@ abstract class Database
     protected $connection;
 
     protected function openConnection(){
+
+        $config = include('../config/config.php');
+
         try {
-            $this->connection = new PDO('mysql:dbname=clocker; host=localhost', 'root', 'zaq1@WSX');
+            $this->connection = new PDO($config['host'], $config['username'], $config['password']);
         }catch (PDOException $e) {
             echo "PDOException was caught: {$e->getMessage()}";
             var_dump($e->getTraceAsString());
