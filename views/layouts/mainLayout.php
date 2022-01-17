@@ -51,7 +51,6 @@ class mainLayout
                 <a href="index.php" class="nav-link"><span class="active-link slide-animation">Home</span></a>
                 <a href="?page=login" class="nav-link"><span class="slide-animation">Log in</span></a>
                 <a href="?page=register" class="nav-link"><span class="slide-animation">Register</span></a>
-                <!--<a href="?page=admin_dashboard" class="nav-link"><span class="slide-animation">PANEL ADMINA</span></a>-->
             </nav>
         <?php
         $html = ob_get_clean();
@@ -65,7 +64,6 @@ class mainLayout
                 <a href="index.php" class="logo">Clocker</a>
                 <a href="index.php" class="nav-link"><span class="active-link slide-animation">Home</span></a>
                 <a href="?page=logout" class="nav-link"><span class="slide-animation">Logout</a>
-                <!--<a href="?page=admin_dashboard" class="nav-link"><span class="slide-animation">PANEL ADMINA</span></a>-->
             </nav>
         <?php
         $html = ob_get_clean();
@@ -78,7 +76,6 @@ class mainLayout
         <nav>
             <a href="index.php" class="logo">Clocker</a>
             <a href="index.php" class="nav-link"><span class="active-link slide-animation">Home</span></a>
-            <a href="?page=admin_dashboard" class="nav-link"><span class="slide-animation">PANEL ADMINA</span></a>
             <a href="?page=logout" class="nav-link"><span class="slide-animation">Logout</a>
         </nav>
         <?php

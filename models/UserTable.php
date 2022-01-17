@@ -33,7 +33,7 @@ class UserTable extends Database
         return $user;
     }
 
-    public function findEmail($email){
+    public function findByEmail($email){
         $this->openConnection();
         $query = "SELECT * FROM user WHERE email = :email";
         $statement = $this->connection->prepare($query);
@@ -49,7 +49,7 @@ class UserTable extends Database
         return $user;
     }
 
-    public function findId($id){
+    public function findById($id){
         $this->openConnection();
         $query = "SELECT * FROM user WHERE id = :id";
         $statement = $this->connection->prepare($query);

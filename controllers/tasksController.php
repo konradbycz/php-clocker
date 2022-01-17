@@ -16,7 +16,7 @@ class tasksController
 
         $userId = $_SESSION['uid'];
         $user = new UserTable();
-        $user = $user->findId($userId);
+        $user = $user->findById($userId);
 
         $tasks = new Tasks();
         $tasks = $tasks->getUserTasks($user);

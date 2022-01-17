@@ -32,13 +32,14 @@ class loginController
         } else{
             $userTable = new UserTable();
 
-            $user = $userTable->findEmail($email);
+            $user = $userTable->findByEmail($email);
             if (!is_null($user)){
                 if (!password_verify($password, $user->getHash())){
                     $response->setHeaders('Location', 'index.php?page=login');
                 }else{
                     $_SESSION['uid'] = $user->getId();
-                    $response->setHeaders('Location', 'index.php?page=tasks');
+                    $_SESSION['role'] = $user->getRole();
+                    $response->setHeaders('Location', 'index.php');
                 }
             }else{
                 $response->setHeaders('Location', 'index.php?page=login');

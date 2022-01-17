@@ -39,7 +39,7 @@ class registerController
         } else{
             $userTable = new UserTable();
 
-            $user = $userTable->findEmail($email);
+            $user = $userTable->findByEmail($email);
             if (!is_null($user)){
                 $response->setHeaders('Location', 'index.php?page=register');
             }else{

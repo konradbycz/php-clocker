@@ -14,7 +14,11 @@ class homepageController
         $response = new Response();
 
         if (isset($_SESSION['uid'])){
-            $response->setHeaders('Location', 'index.php?page=tasks');
+            if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+                $response->setHeaders('Location', 'index.php?page=admin_dashboard');
+            } else {
+                $response->setHeaders('Location', 'index.php?page=user_dashboard');
+            }
         }else{
             $response->setBody(homepageView::render());
         }

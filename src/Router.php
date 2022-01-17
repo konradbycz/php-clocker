@@ -41,14 +41,34 @@ class Router
                 $functionName = 'index';
                 break;
 
+            case 'user_dashboard':
+                if(isset($_SESSION['role']) && $_SESSION['role'] === 'user') {
+                    $controller = 'app\controllers\userController';
+                    $functionName = "index";
+                } else {
+                    $controller = 'app\controllers\homepageController';
+                    $functionName = 'index';
+                }
+                break;
+
             case 'tasks':
-                if (isset($_SESSION['uid'])){
+                if (isset($_SESSION['uid']) && $_SESSION['role'] === 'user'){
                     $controller = 'app\controllers\tasksController';
                     $functionName = 'index';
                     break;
                 }
                 $controller = 'app\controllers\homepageController';
                 $functionName = 'index';
+                break;
+
+            case 'admin_dashboard':
+                if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+                    $controller = 'app\controllers\adminController';
+                    $functionName = "index";
+                } else {
+                    $controller = 'app\controllers\homepageController';
+                    $functionName = 'index';
+                }
                 break;
 
             default:

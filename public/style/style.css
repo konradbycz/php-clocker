@@ -27,7 +27,7 @@ a {
 }
 @media only screen and (max-width: 600px) {
   html {
-    font-size: 18px;
+    font-size: 15px;
   }
   .col-1 {
     width: 8.33%;
@@ -388,8 +388,20 @@ nav {
   filter: drop-shadow(5px 5px 20px #0004);
   opacity: 0.9;
 }
+@media screen and (max-width: 850px) {
+  .svg-icon {
+    width: 11rem;
+    height: 11rem;
+  }
+}
 .counter {
   text-shadow: 0.3rem 0.3rem 1.25rem #000000b3;
+  text-align: center;
+}
+@media screen and (max-width: 850px) {
+  .counter {
+    font-size: 20px;
+  }
 }
 .text-input {
   width: 100%;
@@ -491,9 +503,9 @@ nav {
   width: 100%;
   padding: 1rem 1rem;
   display: grid;
-  grid-template-columns: 2fr 2fr 2fr 0.25fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 2fr 1fr;
-  grid-template-areas: "name name name . start stop end" "desc desc desc . timer timer timer" "desc desc desc . timer timer timer";
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr auto;
+  grid-template-areas: "start stop end" "timer timer timer" "name name name" "desc desc desc";
   border: 0.3rem solid #6bc4ff;
   background: rgba(207, 236, 255, 0.2);
   border-radius: 0.3rem;
@@ -510,25 +522,29 @@ nav {
 }
 .list-row-task-name {
   grid-area: name;
-  align-self: center;
+  place-self: center;
 }
 .list-row-task-desc {
   grid-area: desc;
   font-size: 1rem;
+  place-self: center;
 }
 .list-row-task-start {
   grid-area: start;
-  place-self: center;
+  justify-self: center;
+  align-self: start;
   cursor: pointer;
 }
 .list-row-task-stop {
   grid-area: stop;
-  place-self: center;
+  justify-self: center;
+  align-self: start;
   cursor: pointer;
 }
 .list-row-task-end {
   grid-area: end;
-  place-self: center;
+  justify-self: center;
+  align-self: start;
   cursor: pointer;
 }
 .list-row-task-timer {
@@ -537,9 +553,9 @@ nav {
   align-items: center;
   grid-area: timer;
   place-self: center;
-  width: fit-content;
   padding: 0.5rem;
   border-radius: 0.3rem;
   background-color: #6bc4ff;
+  width: 100%;
 }
 /* #endregion Main content */
