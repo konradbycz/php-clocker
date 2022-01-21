@@ -9,7 +9,7 @@ class Task
 {
     private $id;
     private $userId;
-    private $project;
+    private $projectId;
     private $name;
     private $start;
     private $stop;
@@ -52,17 +52,17 @@ class Task
     /**
      * @return mixed
      */
-    public function getProject()
+    public function getProjectId()
     {
-        return $this->project;
+        return $this->projectId;
     }
 
     /**
-     * @param mixed $project
+     * @param mixed $projectId
      */
-    public function setProject($project)
+    public function setProjectId($projectId)
     {
-        $this->project = $project;
+        $this->projectId = $projectId;
         return $this;
     }
 

@@ -21,7 +21,7 @@ class Tasks extends Database
         $task
             ->setId($row['id'])
             ->setUserId($row['userId'])
-            ->setProject($row['project'])
+            ->setProjectId($row['projectId'])
             ->setName($row['name'])
             ->setStart($row['start'])
             ->setStop($row['stop'])
@@ -29,14 +29,30 @@ class Tasks extends Database
         return $task;
     }
 
-    public function getUserTasks($user){
+    public function getUserTasks($userId){
         $tasks = [];
         $this->openConnection();
 
         $query = "SELECT * FROM task WHERE userId = :id";
         $statement = $this->connection->prepare($query);
 
-        $statement->execute(array('id' => $user->getId()));
+        $statement->execute(array('id' => $userId));
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            $tasks[] = $this->taskFromDB($row);
+        }
+
+        $this->closeConnection();
+        return $tasks;
+    }
+
+    public function getProjectTasks($projectId){
+        $tasks = [];
+        $this->openConnection();
+
+        $query = "SELECT * FROM task WHERE projectId = :projectId";
+        $statement = $this->connection->prepare($query);
+
+        $statement->execute(array('projectId' => $projectId));
         while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
             $tasks[] = $this->taskFromDB($row);
         }

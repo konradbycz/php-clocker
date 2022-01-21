@@ -23,7 +23,6 @@ class tasksView
                     <div class="fit-box">
                         <!-- Nazwa klienta nazwa projektu -->
                         <?php
-
                         foreach ($tasks as $task) {
                             $taskName = $task->getName();
                             $desc = $task->getDescription();

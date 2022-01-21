@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Projects;
 use app\src\Response;
 use app\views\adminDashboardView;
 
@@ -13,7 +14,10 @@ class adminController
     public static function index() {
         $response = new Response();
 
-        $response->setBody(adminDashboardView::render());
+        $projects = new Projects();
+        $projects = $projects->getUserProjects($_SESSION['uid']);
+
+        $response->setBody(adminDashboardView::render($projects));
 
         return $response;
     }

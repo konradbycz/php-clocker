@@ -54,6 +54,7 @@ class registerController
                 $newUser = $userTable->save($user);
 
                 $_SESSION['uid'] = $newUser->getId();
+                $_SESSION['role'] = $newUser->getRole();
                 $response->setHeaders('Location', 'index.php');
             }
         }

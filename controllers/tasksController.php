@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Projects;
 use app\models\Tasks;
 use app\models\UserTable;
 use app\src\Response;
@@ -14,14 +15,31 @@ class tasksController
     public static function index(){
         $response = new Response();
 
-        $userId = $_SESSION['uid'];
-        $user = new UserTable();
-        $user = $user->findById($userId);
+        if (isset($_GET['project'])){
+            $projects = new Projects();
+            $userId = $_SESSION['uid'];
+            $projectId = $_GET['project'];
+            $users = $projects->getUsers($projectId);
 
-        $tasks = new Tasks();
-        $tasks = $tasks->getUserTasks($user);
+            if (!in_array($userId, $users)){
+                $response->setHeaders('Location', 'index.php');
+            }
 
-        $response->setBody(tasksView::render($tasks));
+            $userTasks = [];
+
+            $tasks = new Tasks();
+            $projectTasks = $tasks->getProjectTasks($projectId);
+
+            foreach ($projectTasks as $task){
+                if ($task->getUserId() === $userId){
+                    $userTasks[] = $task;
+                }
+            }
+
+            $response->setBody(tasksView::render($userTasks));
+        }else{
+            $response->setHeaders('Location', 'index.php');
+        }
 
         return $response;
     }
