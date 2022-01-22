@@ -15,7 +15,7 @@ class Projects extends Database
 {
     public function save($project)
     {
-        $query = "INSERT INTO groups(ownerId, groupId, clientId, name) VALUES (:ownerId, :groupId, :clientId, :name)";
+        $query = "INSERT INTO project(ownerId, groupId, clientId, name) VALUES (:ownerId, :groupId, :clientId, :name)";
         $params = [
             'ownerId' => $project->getOwnerId(),
             'groupId' => $project->getGroupId(),
@@ -108,5 +108,36 @@ class Projects extends Database
 
         $this->closeConnection();
         return $project;
+    }
+
+    public function getProjectByName($projectName){
+        $this->openConnection();
+
+        $query = "SELECT * FROM project WHERE name = :name";
+        $statement = $this->connection->prepare($query);
+
+        $statement->execute(array('name' => $projectName));
+        if ($statement->rowCount() === 0){
+            return null;
+        }
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+        $project = $this->projectFromDB($row);
+
+        $this->closeConnection();
+        return $project;
+    }
+
+    public function remove($project){
+        $this->openConnection();
+
+        if ($project->getId() === null){
+            return;
+        }
+
+        $query = "DELETE FROM project WHERE id = :id";
+        $statement = $this->connection->prepare($query);
+        $statement->execute(array('id' => $project->getId()));
+
+        $this->closeConnection();
     }
 }

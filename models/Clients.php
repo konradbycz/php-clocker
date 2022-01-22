@@ -54,4 +54,51 @@ class Clients extends Database
         $this->closeConnection();
         return $client;
     }
+
+    public function getClients($userId){
+        $clients = [];
+        $this->openConnection();
+
+        $query = "SELECT * FROM client WHERE userId = :userId";
+        $statement = $this->connection->prepare($query);
+
+        $statement->execute(array('userId' => $userId));
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            $clients[] = $this->clientFromDB($row);
+        }
+
+        $this->closeConnection();
+        return $clients;
+    }
+
+    public function getClientByName($clientName){
+        $this->openConnection();
+
+        $query = "SELECT * FROM client WHERE name = :name";
+        $statement = $this->connection->prepare($query);
+
+        $statement->execute(array('name' => $clientName));
+        if ($statement->rowCount() === 0){
+            return null;
+        }
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+        $client = $this->clientFromDB($row);
+
+        $this->closeConnection();
+        return $client;
+    }
+
+    public function remove($client){
+        $this->openConnection();
+
+        if ($client->getId() === null){
+            return;
+        }
+
+        $query = "DELETE FROM client WHERE id = :id";
+        $statement = $this->connection->prepare($query);
+        $statement->execute(array('id' => $client->getId()));
+
+        $this->closeConnection();
+    }
 }

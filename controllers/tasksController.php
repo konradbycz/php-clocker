@@ -31,7 +31,7 @@ class tasksController
             $projectTasks = $tasks->getProjectTasks($projectId);
 
             foreach ($projectTasks as $task){
-                if ($task->getUserId() === $userId){
+                if ($task->getUserId() === $userId || $_SESSION['role'] === 'admin'){
                     $userTasks[] = $task;
                 }
             }

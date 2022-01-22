@@ -86,4 +86,54 @@ class Groups extends Database
         $this->closeConnection();
         return $users;
     }
+
+    public function getGroupByName($name){
+        $this->openConnection();
+
+        $query = "SELECT * FROM groups WHERE name = :name";
+        $statement = $this->connection->prepare($query);
+
+        $statement->execute(array('name' => $name));
+        if ($statement->rowCount() === 0){
+            return null;
+        }
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+        $group = $this->groupFromDB($row);
+
+        $this->closeConnection();
+        return $group;
+    }
+
+    public function addUserToGroup($userId, $groupId){
+        $this->openConnection();
+
+        $query = "INSERT INTO usersgroups(groupId, userId) VALUES (:groupId, :userId)";
+        $params = [
+            'groupId' => $groupId,
+            'userId' => $userId
+        ];
+
+        $statement = $this->connection->prepare($query);
+        $statement->execute($params);
+
+        $this->closeConnection();
+    }
+
+    public function remove($group){
+        $this->openConnection();
+
+        if ($group->getId() === null){
+            return;
+        }
+
+        $query = "DELETE FROM groups WHERE id = :id";
+        $statement = $this->connection->prepare($query);
+        $statement->execute(array('id' => $group->getId()));
+
+        $query = "DELETE FROM usersgroups WHERE groupId = :groupId";
+        $statement = $this->connection->prepare($query);
+        $statement->execute(array('groupId' => $group->getId()));
+
+        $this->closeConnection();
+    }
 }

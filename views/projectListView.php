@@ -8,7 +8,7 @@ use app\views\layouts\mainLayout;
 /**
  * @package app\views
  */
-class adminDashboardView
+class projectListView
 {
     public static function render($projects = []) {
         ob_start();
@@ -16,27 +16,15 @@ class adminDashboardView
         ?>
 
         <div class="container">
-            <!-- Admin actions section -->
-            <div class="row">
-                <div class="col-8 col-s-8 offset-2 offset-s-2">
-                    <h1 class="title">Admin Dashboard</h1>
-                    <p class="fit-box fit-box-row">
-                        <button class="action-button"><img class="button-svg" src="../img/person-svg.svg">Manage users</button>
-                        <a href="index.php?page=manage_groups"><button class="action-button"><img class="button-svg" src="../img/group-svg.svg">Manage groups</button></a>
-                        <a href="index.php?page=manage_clients"><button class="action-button"><img class="button-svg" src="../img/person-svg.svg">Manage clients</button></a>
-                        <a href="index.php?page=manage_projects"><button class="action-button"><img class="button-svg" src="../img/task-svg.svg">Manage projects</button></a>
-                        <button class="action-button"><img class="button-svg" src="../img/report-svg.svg">Generate report</button>
-                    </p>
-                </div>
-            </div>
-            <!-- Project List Section -->
             <div class="row">
                 <div class="col-8 col-s-8 offset-2 offset-s-2">
                     <h1 class="title">Projects</h1>
+                    <a href="index.php?page=add_project">Dodaj projekt</a>
                     <div class="fit-box">
                         <?php
 
                         foreach ($projects as $project){
+                            $projectId = $project->getId();
                             $projectName = $project->getName();
                             $projectClient = $project->getClientId();
                             $client = new Clients();
@@ -48,6 +36,7 @@ class adminDashboardView
                                         <div class='list-row-name'>$projectName</div>
                                     </a>
                                     <div class='list-row-author'>$clientName</div>
+                                    <a href='index.php?page=remove_project&project=$projectId'>Usun projekt</a>
                                 </div>
                             ";
                         }
@@ -57,7 +46,8 @@ class adminDashboardView
                 </div>
             </div>
         </div>
-    <?php
+
+        <?php
         $html = ob_get_clean();
         return $html;
     }

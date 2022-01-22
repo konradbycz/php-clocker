@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 21 Sty 2022, 23:20
+-- Czas generowania: 22 Sty 2022, 23:35
 -- Wersja serwera: 10.1.28-MariaDB
 -- Wersja PHP: 7.1.11
 
@@ -39,7 +39,8 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id`, `userId`, `name`) VALUES
-(1, 1, 'ZUT');
+(1, 1, 'ZUT'),
+(3, 1, 'WIZUT');
 
 -- --------------------------------------------------------
 
@@ -198,19 +199,19 @@ ALTER TABLE `usersgroups`
 -- AUTO_INCREMENT dla tabeli `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT dla tabeli `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT dla tabeli `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT dla tabeli `task`
@@ -228,7 +229,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT dla tabeli `usersgroups`
 --
 ALTER TABLE `usersgroups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
