@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 22 Sty 2022, 23:35
+-- Czas generowania: 23 Sty 2022, 23:57
 -- Wersja serwera: 10.1.28-MariaDB
 -- Wersja PHP: 7.1.11
 
@@ -93,8 +93,10 @@ CREATE TABLE `task` (
   `userId` int(11) NOT NULL,
   `projectId` int(11) NOT NULL,
   `name` varchar(50) COLLATE utf8_polish_ci NOT NULL,
-  `start` datetime NOT NULL,
-  `stop` datetime NOT NULL,
+  `start` datetime DEFAULT NULL,
+  `stop` datetime DEFAULT NULL,
+  `startSession` int(11) DEFAULT NULL,
+  `totalTime` int(11) DEFAULT NULL,
   `description` varchar(256) COLLATE utf8_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
@@ -102,8 +104,9 @@ CREATE TABLE `task` (
 -- Zrzut danych tabeli `task`
 --
 
-INSERT INTO `task` (`id`, `userId`, `projectId`, `name`, `start`, `stop`, `description`) VALUES
-(1, 2, 1, 'NWM', '2022-01-17 00:00:00', '2022-01-18 00:00:00', 'NWM');
+INSERT INTO `task` (`id`, `userId`, `projectId`, `name`, `start`, `stop`, `startSession`, `totalTime`, `description`) VALUES
+(1, 2, 1, 'NWM', '2022-01-17 00:00:00', '2022-01-18 00:00:00', NULL, NULL, 'NWM'),
+(5, 1, 1, 'kek', NULL, NULL, NULL, NULL, 'kek');
 
 -- --------------------------------------------------------
 
@@ -146,9 +149,9 @@ CREATE TABLE `usersgroups` (
 --
 
 INSERT INTO `usersgroups` (`id`, `groupId`, `userId`) VALUES
-(1, 1, 4),
 (2, 1, 2),
-(3, 1, 1);
+(3, 1, 1),
+(6, 1, 4);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -205,19 +208,19 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT dla tabeli `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT dla tabeli `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT dla tabeli `task`
 --
 ALTER TABLE `task`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT dla tabeli `user`
