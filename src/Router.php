@@ -7,6 +7,8 @@ use app\controllers\groupController;
 use app\controllers\projectController;
 use app\controllers\registerController;
 use app\controllers\loginController;
+use app\controllers\tasksController;
+
 /**
  * @package app\src
  */
@@ -64,6 +66,21 @@ class Router
                 $functionName = 'index';
                 break;
 
+            case 'add_task':
+                if (isset($_SESSION['uid'])){
+                    if(!empty($_POST['name'])){
+                        $controller = tasksController::class;
+                        $functionName = "addTask";
+                        break;
+                    }
+                    $controller = 'app\controllers\tasksController';
+                    $functionName = 'addTaskForm';
+                    break;
+                }
+                $controller = 'app\controllers\homepageController';
+                $functionName = 'index';
+                break;
+
             case 'admin_dashboard':
                 if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
                     $controller = 'app\controllers\adminController';
@@ -102,6 +119,32 @@ class Router
                     $controller = 'app\controllers\homepageController';
                     $functionName = 'index';
                 }
+                break;
+
+            case 'add_user_to_group':
+                if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+                    if(!empty($_POST['email'])){
+                        $controller = groupController::class;
+                        $functionName = "addUserToGroup";
+                        break;
+                    }
+                    $controller = 'app\controllers\groupController';
+                    $functionName = "addUserForm";
+                } else {
+                    $controller = 'app\controllers\homepageController';
+                    $functionName = 'index';
+                }
+                break;
+
+            case 'remove_user_from_group':
+                if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+                    $controller = 'app\controllers\groupController';
+                    $functionName = "removeUserFromGroup";
+                    break;
+                }
+                $controller = 'app\controllers\homepageController';
+                $functionName = 'index';
+
                 break;
 
             case 'manage_clients':

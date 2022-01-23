@@ -32,7 +32,7 @@ class projectListView
 
                             echo "
                                 <div class='list-row'>
-                                    <a href='index.php?page=tasks&project=$projectClient'>
+                                    <a href='index.php?page=tasks&project=$projectId'>
                                         <div class='list-row-name'>$projectName</div>
                                     </a>
                                     <div class='list-row-author'>$clientName</div>

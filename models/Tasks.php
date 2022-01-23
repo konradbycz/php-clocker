@@ -12,7 +12,25 @@ use PDOException;
 class Tasks extends Database
 {
     public function save($task){
-        //
+        $query = "INSERT INTO task(userId, projectId, name, start, stop, description) VALUES (:userId, :projectId, :name, :start, :stop, :description)";
+        $params = [
+            'userId' => $task->getUserId(),
+            'projectId' => $task->getProjectId(),
+            'name' => $task->getName(),
+            'start' => $task->getStart(),
+            'stop' => $task->getStop(),
+            'description' => $task->getDescription()
+        ];
+
+        $this->openConnection();
+
+        $statement = $this->connection->prepare($query);
+        $statement->execute($params);
+
+        $task->setId($this->connection->lastInsertId());
+
+        $this->closeConnection();
+        return $task;
     }
 
     public function taskFromDB($row){

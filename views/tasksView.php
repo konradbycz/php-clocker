@@ -10,7 +10,7 @@ use app\models\Task;
  */
 class tasksView
 {
-    public static function render($tasks = []){
+    public static function render($tasks = [], $project = null){
         ob_start();
         ?>
         <?= mainLayout::renderHeader() ?>
@@ -18,8 +18,8 @@ class tasksView
             <!-- Project List Section -->
             <div class="row">
                 <div class="col-10 col-s-8 offset-1 offset-s-2">
-                    <h1 class="title">IDelivery Tasks</h1>
-
+                    <h1 class="title"><?php echo $project->getName();?></h1>
+                    <a href="index.php?page=add_task&project=<?php echo $project->getId();?>">Dodaj taska</a>
                     <div class="fit-box">
                         <!-- Nazwa klienta nazwa projektu -->
                         <?php

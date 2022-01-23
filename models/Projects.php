@@ -104,6 +104,9 @@ class Projects extends Database
 
         $statement->execute(array('id' => $projectId));
         $row = $statement->fetch(PDO::FETCH_ASSOC);
+        if (!$row){
+            return null;
+        }
         $project = $this->projectFromDB($row);
 
         $this->closeConnection();

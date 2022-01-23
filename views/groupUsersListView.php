@@ -9,7 +9,8 @@ use app\views\layouts\mainLayout;
  */
 class groupUsersListView
 {
-    public static function render($users = []) {
+    public static function render($users = [], $group = null) {
+        $groupId = $group->getId();
         ob_start();
         echo mainLayout::renderHeader();
         ?>
@@ -17,6 +18,7 @@ class groupUsersListView
             <div class="row">
                 <div class="col-8 col-s-8 offset-2 offset-s-2">
                     <h1 class="title">Group users</h1>
+                    <a href="index.php?page=add_user_to_group&group=<?php echo $groupId;?>">Dodaj uzytkownika</a>
                     <div class="fit-box">
                         <?php
 
@@ -29,6 +31,7 @@ class groupUsersListView
                                     <a href='#'>
                                         <div class='list-row-name'>$userName</div>
                                     </a>
+                                    <a href='index.php?page=remove_user_from_group&group=$groupId&user=$userId'>Usun uzytkownika</a>
                                 </div>
                             ";
                         }

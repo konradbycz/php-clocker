@@ -9,6 +9,7 @@ use app\views\groupListView;
 use app\views\groupFormView;
 use app\models\Group;
 use app\views\groupUsersListView;
+use app\views\addUserFormView;
 
 /**
  * @package app\controllers
@@ -94,7 +95,85 @@ class groupController
             foreach ($userIds as $userId) {
                 $users[] = $userRepo->findById($userId);
             }
-            $response->setBody(groupUsersListView::render($users));
+            $response->setBody(groupUsersListView::render($users, $groups->getGroupById($_GET['group'])));
+        }
+        return $response;
+    }
+
+    public static function addUserToGroup(){
+        $response = new Response();
+
+        $email = $_POST['email'];
+        $groupId = $_GET['group'];
+
+        if(!isset($email) || !isset($groupId)){
+            $response->setHeaders('Location', 'index.php?page=manage_groups');
+            return $response;
+        }
+        $users = new UserTable();
+        $user = $users->findByEmail($email);
+
+        if ($user === null){
+            $response->setHeaders('Location', 'index.php?page=manage_groups');
+            return $response;
+        }
+        $groups = new Groups();
+        $group = $groups->getGroupById($groupId);
+
+        if ($group === null){
+            $response->setHeaders('Location', 'index.php?page=manage_groups');
+            return $response;
+        }
+
+        $groups->addUserToGroup($user->getId(), $groupId);
+        $response->setHeaders('Location', "index.php?page=manage_group&group=".$groupId);
+
+        return $response;
+    }
+
+    public static function removeUserFromGroup(){
+        $response = new Response();
+
+        $groupId = $_GET['group'];
+        $userId = $_GET['user'];
+
+        if (!isset($groupId) || !isset($userId)){
+            $response->setHeaders('Location', 'index.php?page=manage_groups');
+            return $response;
+        }
+
+        $groups = new Groups();
+        $users = new UserTable();
+        $group = $groups->getGroupById($groupId);
+        $user = $users->findById($userId);
+
+        if ($user === null || $group === null){
+            $response->setHeaders('Location', 'index.php?page=manage_groups');
+            return $response;
+        }
+
+        $groups->removeUserFromGroup($userId, $groupId);
+
+        $response->setHeaders('Location', 'index.php?page=manage_group&group='.$groupId);
+
+        return $response;
+    }
+
+    public static function addUserForm(){
+        $response = new Response();
+
+        if (empty($_GET['group'])){
+            $response->setHeaders('Location', 'index.php?page=manage_groups');
+        }else{
+            $groupId = $_GET['group'];
+            $groups = new Groups();
+            $group = $groups->getGroupById($groupId);
+
+            if ($group === null){
+                $response->setHeaders('Location', 'index.php?page=manage_groups');
+            }else{
+                $response->setBody(addUserFormView::render($group));
+            }
         }
         return $response;
     }

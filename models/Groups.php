@@ -64,7 +64,11 @@ class Groups extends Database
         $statement = $this->connection->prepare($query);
 
         $statement->execute(array('groupId' => $groupId));
+        if ($statement->rowCount() === 0){
+            return null;
+        }
         $row = $statement->fetch(PDO::FETCH_ASSOC);
+
         $group = $this->groupFromDB($row);
 
         $this->closeConnection();
@@ -111,6 +115,21 @@ class Groups extends Database
         $params = [
             'groupId' => $groupId,
             'userId' => $userId
+        ];
+
+        $statement = $this->connection->prepare($query);
+        $statement->execute($params);
+
+        $this->closeConnection();
+    }
+
+    public function removeUserFromGroup($userId, $groupId){
+        $this->openConnection();
+
+        $query = "DELETE FROM usersgroups WHERE userId=:userId AND groupId=:groupId";
+        $params = [
+            'userId' => $userId,
+            'groupId' => $groupId
         ];
 
         $statement = $this->connection->prepare($query);
