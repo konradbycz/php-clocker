@@ -21,8 +21,9 @@ class mainLayout
             <link rel="stylesheet" href="./style/style.css">
 
             <script src="./src/index.js" defer></script>
+            <script src="./src/getTaskData.js"></script>
         </head>
-        <body>
+        <body onload="getData()">
 
             <!-- Background animation -->
             <div class="bg"></div>

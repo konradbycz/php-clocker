@@ -85,6 +85,9 @@ class Projects extends Database
         $this->openConnection();
 
         $groupId = $this->getProjectById($projectId)->getGroupId();
+
+
+
         $group = new Groups();
         $group = $group->getGroupUsers($groupId);
 

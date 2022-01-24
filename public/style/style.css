@@ -371,6 +371,7 @@ nav {
   border-radius: 0.3rem;
   text-align: justify;
   padding: 1.5rem 1.5rem;
+  margin: 1.5rem;
 }
 .fit-box-row {
   flex-direction: row;
@@ -403,12 +404,13 @@ nav {
     font-size: 20px;
   }
 }
-.text-input {
+.text-input,
+.select-input {
   width: 100%;
+  height: 2.5rem;
   color: black;
   font-size: 1rem;
   text-align: center;
-  line-height: 2.5rem;
   outline: none;
   border-radius: 0.3rem;
   border: none;
@@ -456,33 +458,36 @@ nav {
   margin: 0 1rem;
   transition: all 200ms ease-in-out;
 }
+.action-button-bigger {
+  font-size: 1.5rem;
+}
 .action-button:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
-.list-row {
+.list-row-project {
   width: fit-content;
   align-self: center;
   width: 100%;
   padding: 1rem 1rem;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 0.5fr 0.5fr 1fr 0.25fr 0.25fr;
   grid-template-rows: 1fr 1fr;
-  grid-template-areas: "name name name" "author . .";
+  grid-template-areas: 'name name name name delete' 'group client . . .';
   box-shadow: 0.3rem 0.3rem 3rem #00000033 inset;
   border-radius: 0.3rem;
   transition: all 200ms ease-in-out;
 }
-.list-row:hover {
+.list-row-project:hover {
   backdrop-filter: brightness(90%);
 }
-.list-row:only-of-type {
+.list-row-project:only-of-type {
   margin: 0;
 }
-.list-row:not(.list-row:last-of-type) {
+.list-row-project:not(.list-row-project:last-of-type) {
   margin-bottom: 1.5rem;
 }
-.list-row a {
+.list-row-project a {
   cursor: pointer;
 }
 .list-row-name {
@@ -490,8 +495,15 @@ nav {
   color: #ecf8ff;
   text-shadow: 0.3rem 0.3rem 1.25rem #00203b;
 }
-.list-row-author {
-  grid-area: author;
+.list-row-client {
+  grid-area: client;
+  font-size: 1rem;
+  font-weight: normal;
+  color: #cfecff;
+  text-shadow: 0.3rem 0.3rem 1.25rem #00203b;
+}
+.list-row-group {
+  grid-area: group;
   font-size: 1rem;
   font-weight: normal;
   color: #cfecff;
@@ -505,7 +517,7 @@ nav {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr auto;
-  grid-template-areas: "start stop end" "timer timer timer" "name name name" "desc desc desc";
+  grid-template-areas: 'start stop end' 'timer timer timer' 'name name name' 'desc desc desc';
   border: 0.3rem solid #6bc4ff;
   background: rgba(207, 236, 255, 0.2);
   border-radius: 0.3rem;
@@ -557,5 +569,39 @@ nav {
   border-radius: 0.3rem;
   background-color: #6bc4ff;
   width: 100%;
+}
+.list-row-reusable {
+  width: fit-content;
+  align-self: center;
+  width: 100%;
+  padding: 1rem 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 0.25fr 0.25fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'name . . edit delete';
+  box-shadow: 0.3rem 0.3rem 3rem #00000033 inset;
+  border-radius: 0.3rem;
+  transition: all 200ms ease-in-out;
+}
+.list-row-reusable:only-of-type {
+  margin: 0;
+}
+.list-row-reusable:not(.list-row-reusable:last-of-type) {
+  margin-bottom: 1.5rem;
+}
+.list-row-reusable a {
+  cursor: pointer;
+}
+.list-row-name-reusable {
+  grid-area: name;
+  place-self: center;
+}
+.list-row-edit-reusable {
+  grid-area: edit;
+  place-self: center;
+}
+.list-row-delete-reusable {
+  grid-area: delete;
+  place-self: center;
 }
 /* #endregion Main content */

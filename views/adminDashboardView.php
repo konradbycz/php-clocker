@@ -3,6 +3,7 @@
 namespace app\views;
 
 use app\models\Clients;
+use app\models\Groups;
 use app\views\layouts\mainLayout;
 
 /**
@@ -37,17 +38,23 @@ class adminDashboardView
                         <?php
 
                         foreach ($projects as $project){
+                            $projectId = $project->getId();
                             $projectName = $project->getName();
                             $projectClient = $project->getClientId();
                             $client = new Clients();
                             $clientName = $client->getClientById($projectClient)->getName();
 
+                            $groups = new Groups();
+                            $group = $groups->getGroupById($project->getGroupId());
+                            $groupName = $group->getName();
+
                             echo "
-                                <div class='list-row'>
-                                    <a href='index.php?page=tasks&project=$projectClient'>
+                                <div class='list-row-project'>
+                                    <a href='index.php?page=tasks&project=$projectId'>
                                         <div class='list-row-name'>$projectName</div>
                                     </a>
-                                    <div class='list-row-author'>$clientName</div>
+                                    <div class='list-row-group'>$groupName</div>
+                                    <div class='list-row-client'>$clientName</div>
                                 </div>
                             ";
                         }
@@ -56,6 +63,9 @@ class adminDashboardView
                     </div>
                 </div>
             </div>
+
+
+
         </div>
     <?php
         $html = ob_get_clean();

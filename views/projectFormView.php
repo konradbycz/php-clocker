@@ -18,31 +18,32 @@ class projectFormView
             <div class="row">
                 <div class="col-8 col-s-8 offset-2 offset-s-2">
                     <h1 class="title">Project</h1>
-                    <form class="fit-box" action="?page=add_project" method="post">
-                        <h2>Project name</h2>
-                        <input class="text-input" type="text" name="projectName">
-                        <h2>Select group</h2>
-                        <select name="groupId" id="groupId">
-                            <?php
+
+                        <form class="fit-box" action="?page=add_project" method="post">
+                            <h2>Project name</h2>
+                            <input class="text-input" type="text" name="projectName">
+                            <h2>Group</h2>
+                            <select class="select-input" type="select" name="groupId">
+                                <?php
                                 foreach ($groups as $group){
                                     $groupId = $group->getId();
                                     $groupName = $group->getName();
                                     echo "<option value='$groupId'>$groupName</option>";
                                 }
-                            ?>
-                        </select>
-                        <h2>Select client</h2>
-                        <select name="clientId" id="clientId">
-                            <?php
-                            foreach ($clients as $client){
-                                $clientId = $client->getId();
-                                $clientName = $client->getName();
-                                echo "<option value='$clientId'>$clientName</option>";
-                            }
-                            ?>
-                        </select>
-                        <input class="submit-input" type="submit" value="Submit">
-                    </form>
+                                ?>
+                            </select>
+                            <h2>Client</h2>
+                            <select class="select-input" type="select" name="clientId">
+                                <?php
+                                foreach ($clients as $client){
+                                    $clientId = $client->getId();
+                                    $clientName = $client->getName();
+                                    echo "<option value='$clientId'>$clientName</option>";
+                                }
+                                ?>
+                            </select>
+                            <input class="submit-input" type="submit" value="Submit">
+                        </form>
                 </div>
             </div>
         </div>

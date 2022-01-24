@@ -13,7 +13,43 @@ class Task
     private $name;
     private $start;
     private $stop;
+    private $startSession;
+    private $totalTime;
     private $description;
+
+    /**
+     * @return mixed
+     */
+    public function getStartSession()
+    {
+        return $this->startSession;
+    }
+
+    /**
+     * @param mixed $startSession
+     */
+    public function setStartSession($startSession)
+    {
+        $this->startSession = $startSession;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTotalTime()
+    {
+        return $this->totalTime;
+    }
+
+    /**
+     * @param mixed $totalTime
+     */
+    public function setTotalTime($totalTime)
+    {
+        $this->totalTime = $totalTime;
+        return $this;
+    }
 
     /**
      * @return mixed

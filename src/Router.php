@@ -232,6 +232,37 @@ class Router
                 }
                 break;
 
+            case 'start_session':
+                if (isset($_SESSION['uid'])){
+                    $controller = 'app\controllers\tasksController';
+                    $functionName = 'startSession';
+                    break;
+                }
+                $controller = 'app\controllers\homepageController';
+                $functionName = 'index';
+                break;
+
+            case 'stop_session':
+                if (isset($_SESSION['uid'])){
+                    $controller = 'app\controllers\tasksController';
+                    $functionName = 'stopSession';
+                    break;
+                }
+                $controller = 'app\controllers\homepageController';
+                $functionName = 'index';
+                break;
+
+            case 'get_session_time':
+                if (isset($_SESSION['uid'])){
+                    $controller = 'app\controllers\tasksController';
+                    $functionName = 'getSessionTime';
+                    break;
+                }
+                $controller = 'app\controllers\homepageController';
+                $functionName = 'index';
+                break;
+
+
             default:
                 $controller = 'app\controllers\homepageController';
                 $functionName = 'index';

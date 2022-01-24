@@ -106,4 +106,130 @@ class tasksController
 
         return $response;
     }
+
+    public static function startSession() {
+        $response = new Response();
+        $response->setHeaders('Content-Type', "application/json");
+
+        if(!isset($_GET['task'])) {
+            $json = [
+                "msg" => "No task id"
+            ];
+            $response->setBody(json_encode($json));
+            return $response;
+        }
+
+        $taskId = $_GET['task'];
+        $tasks = new Tasks();
+        $task = $tasks->getTaskById($taskId);
+
+        if($task === null) {
+            $json = [
+                "msg" => "Invalid task id"
+            ];
+            $response->setBody(json_encode($json));
+            return $response;
+        }
+
+        if($task->getStartSession() !== null) {
+            $json = [
+                "msg" => "Already started session"
+            ];
+            $response->setBody(json_encode($json));
+            return $response;
+        }
+
+        $task->setStartSession(time());
+        $task = $tasks->save($task);
+
+        $json = [
+            "startTime" => $task->getStartSession(),
+            "totalTime" => $task->getTotalTime()
+        ];
+
+        $response->setBody(json_encode($json));
+        return $response;
+    }
+
+    public static function stopSession() {
+        $response = new Response();
+        $response->setHeaders('Content-Type', "application/json");
+
+        if(!isset($_GET['task'])) {
+            $json = [
+                "msg" => "No task id"
+            ];
+            $response->setBody(json_encode($json));
+            return $response;
+        }
+
+        $taskId = $_GET['task'];
+        $tasks = new Tasks();
+        $task = $tasks->getTaskById($taskId);
+
+        if($task === null) {
+            $json = [
+                "msg" => "Invalid task id"
+            ];
+            $response->setBody(json_encode($json));
+            return $response;
+        }
+
+        if($task->getStartSession() === null) {
+            $json = [
+                "msg" => "Already stopped session"
+            ];
+            $response->setBody(json_encode($json));
+            return $response;
+        }
+
+        $stopTime = time();
+        $diff = $stopTime - $task->getStartSession();
+        $totalTime = $task->getTotalTime() + $diff;
+
+        $task->setTotalTime($totalTime);
+        $task->setStartSession(null);
+        $task = $tasks->save($task);
+
+        $json = [
+            "startTime" => $task->getStartSession(),
+            "totalTime" => $task->getTotalTime()
+        ];
+
+        $response->setBody(json_encode($json));
+        return $response;
+    }
+
+    public static function getSessionTime() {
+        $response = new Response();
+        $response->setHeaders('Content-Type', "application/json");
+
+        if(!isset($_GET['task'])) {
+            $json = [
+                "msg" => "No task id"
+            ];
+            $response->setBody(json_encode($json));
+            return $response;
+        }
+
+        $taskId = $_GET['task'];
+        $tasks = new Tasks();
+        $task = $tasks->getTaskById($taskId);
+
+        if($task === null) {
+            $json = [
+                "msg" => "Invalid task id"
+            ];
+            $response->setBody(json_encode($json));
+            return $response;
+        }
+
+        $json = [
+            "startTime" => $task->getStartSession(),
+            "totalTime" => $task->getTotalTime()
+        ];
+
+        $response->setBody(json_encode($json));
+        return $response;
+    }
 }
