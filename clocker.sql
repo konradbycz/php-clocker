@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 24 Sty 2022, 11:51
+-- Czas generowania: 24 Sty 2022, 12:02
 -- Wersja serwera: 10.4.17-MariaDB
 -- Wersja PHP: 7.4.15
 
@@ -80,7 +80,9 @@ CREATE TABLE `project` (
 
 INSERT INTO `project` (`id`, `ownerId`, `groupId`, `clientId`, `name`) VALUES
 (3, 1, 4, 7, 'Clocker frontend'),
-(4, 1, 5, 7, 'Clocker backend');
+(4, 1, 5, 7, 'Clocker backend'),
+(5, 1, 4, 7, 'IPZ project - frontend'),
+(6, 1, 5, 7, 'IPZ project - backend');
 
 -- --------------------------------------------------------
 
@@ -109,7 +111,14 @@ INSERT INTO `task` (`id`, `userId`, `projectId`, `name`, `start`, `stop`, `start
 (14, 4, 3, 'Management views', NULL, NULL, NULL, 0, 'Create views for managing group/client/project'),
 (15, 2, 4, 'Seed database', NULL, NULL, NULL, 0, 'Seed database with sample data'),
 (16, 2, 4, 'Add user management system', NULL, NULL, NULL, 0, 'Add user management with ability to change user privileges'),
-(17, 1, 4, 'Add group management system', NULL, NULL, NULL, 0, 'Add group management system with ability to add new group and add users to existing group');
+(17, 1, 4, 'Add group management system', NULL, NULL, NULL, 0, 'Add group management system with ability to add new group and add users to existing group'),
+(18, 5, 5, 'Create mockups', NULL, NULL, NULL, 0, 'Create mockup views in Figma'),
+(19, 5, 5, 'Initialize project on Github', NULL, NULL, NULL, 0, 'Make basic project structure and push to repository'),
+(20, 4, 5, 'Create register pages', NULL, NULL, NULL, 0, 'Create register pages for both account types'),
+(21, 4, 5, 'Create login page', NULL, NULL, NULL, 0, 'Create simple login page with inputs for email and password'),
+(22, 1, 6, 'Login/register system', NULL, NULL, NULL, 0, 'Create endpoints for register and login'),
+(23, 1, 6, 'Create middleware for authorization', NULL, NULL, NULL, 0, 'Create middleware for authorization with JSON Web token'),
+(24, 2, 6, 'Create DB Schema', NULL, NULL, NULL, 0, 'Create database schema and models in Prisma');
 
 -- --------------------------------------------------------
 
@@ -220,13 +229,13 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT dla tabeli `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT dla tabeli `task`
 --
 ALTER TABLE `task`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT dla tabeli `user`
