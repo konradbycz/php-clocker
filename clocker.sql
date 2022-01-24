@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 24 Sty 2022, 02:54
+-- Czas generowania: 24 Sty 2022, 11:51
 -- Wersja serwera: 10.4.17-MariaDB
 -- Wersja PHP: 7.4.15
 
@@ -38,7 +38,7 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id`, `userId`, `name`) VALUES
-(6, 1, 'Mak Kwak');
+(7, 1, 'Zachodniopomorski Uniwersytet Technologiczny  ');
 
 -- --------------------------------------------------------
 
@@ -57,7 +57,8 @@ CREATE TABLE `groups` (
 --
 
 INSERT INTO `groups` (`id`, `ownerId`, `name`) VALUES
-(3, 1, 'Deweloperzy');
+(4, 1, 'Frontend Team'),
+(5, 1, 'Backend Team');
 
 -- --------------------------------------------------------
 
@@ -78,7 +79,8 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`id`, `ownerId`, `groupId`, `clientId`, `name`) VALUES
-(2, 1, 3, 6, 'Bułka z frytkami');
+(3, 1, 4, 7, 'Clocker frontend'),
+(4, 1, 5, 7, 'Clocker backend');
 
 -- --------------------------------------------------------
 
@@ -103,10 +105,11 @@ CREATE TABLE `task` (
 --
 
 INSERT INTO `task` (`id`, `userId`, `projectId`, `name`, `start`, `stop`, `startSession`, `totalTime`, `description`) VALUES
-(9, 1, 2, 'Bułka', NULL, NULL, NULL, 0, 'Podgrzanie bułki'),
-(10, 1, 2, 'Sosy dolne', NULL, NULL, NULL, 0, 'Jakie sosiwo wariacie?'),
-(11, 1, 2, 'Środek bułki', NULL, NULL, NULL, 8, 'Podgrzać frytki w mikrofalówce'),
-(12, 2, 2, 'Wydać zupe', NULL, NULL, NULL, 16, 'Plus ketchup i minimalna ilość sosu diabolo');
+(13, 5, 3, 'Dashboard views', NULL, NULL, NULL, 0, 'Create dashboard views for admin and user with action buttons and list of projects'),
+(14, 4, 3, 'Management views', NULL, NULL, NULL, 0, 'Create views for managing group/client/project'),
+(15, 2, 4, 'Seed database', NULL, NULL, NULL, 0, 'Seed database with sample data'),
+(16, 2, 4, 'Add user management system', NULL, NULL, NULL, 0, 'Add user management with ability to change user privileges'),
+(17, 1, 4, 'Add group management system', NULL, NULL, NULL, 0, 'Add group management system with ability to add new group and add users to existing group');
 
 -- --------------------------------------------------------
 
@@ -131,7 +134,7 @@ INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `hash`, `role`) VALU
 (1, 'Konrad', 'Byczynski', 'konrad@zut.pl', '$2y$10$B/i1eV8CCZaNL1QTKZPvOeKiRzA2uJ32DrlxEcRJKUY09pq3ZoPkO', 'admin'),
 (2, 'Pawel', 'Drozgowski', 'pawel@zut.pl', '$2y$10$8xVc.oVBAiAJ9s/CfqA84O1ghbCoXe54n.WII0jD2umW2Hbevrvom', 'user'),
 (4, 'maks', 'wiese', 'maks@zut.pl', '$2y$10$XZMpgUq2WDeLADmGY3D4ketQaDWHN.YdW3R3NwGVqAwSSz4ALKlC2', 'user'),
-(5, 'Paweł', 'Durczak', 'pawel2@zutsmrut.pl', '$2y$10$UovgfTtO55a/tIPrCw9INuGeq.2bkGY3Dd5NzjGoaPtHyWIARKbqy', 'user');
+(5, 'Paweł', 'Durczak', 'pawel2@zut.pl', '$2y$10$UovgfTtO55a/tIPrCw9INuGeq.2bkGY3Dd5NzjGoaPtHyWIARKbqy', 'user');
 
 -- --------------------------------------------------------
 
@@ -150,10 +153,11 @@ CREATE TABLE `usersgroups` (
 --
 
 INSERT INTO `usersgroups` (`id`, `groupId`, `userId`) VALUES
-(8, 3, 1),
-(9, 3, 2),
-(10, 3, 4),
-(11, 3, 5);
+(12, 4, 1),
+(13, 5, 1),
+(14, 4, 5),
+(15, 4, 4),
+(16, 5, 2);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -204,25 +208,25 @@ ALTER TABLE `usersgroups`
 -- AUTO_INCREMENT dla tabeli `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT dla tabeli `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT dla tabeli `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT dla tabeli `task`
 --
 ALTER TABLE `task`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT dla tabeli `user`
@@ -234,7 +238,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT dla tabeli `usersgroups`
 --
 ALTER TABLE `usersgroups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
